@@ -1,3 +1,11 @@
+// getting website URL
+const protocol = window.location.protocol
+const hostname = window.location.hostname
+const port = window.location.port
+export const basesURL = `${protocol}//${hostname}${port ? `:${port}` : ''}/.netlify/functions`
+export const locationFunctionName = `${basesURL}/location`
+export const weatherFunctionName = `${basesURL}/weather`
+
 // location type
 export type Location = { latitude: number; longitude: number }
 

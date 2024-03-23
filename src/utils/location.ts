@@ -1,16 +1,8 @@
-import { Location, NetlifyLocation } from './common'
+import { Location, locationFunctionName, NetlifyLocation } from './common'
 
-// getting website URL
-const protocol = window.location.protocol
-const hostname = window.location.hostname
-const port = window.location.port
-const basesURL = `${protocol}//${hostname}${port ? `:${port}` : ''}/.netlify/functions`
-const functionName = 'location'
-
-console.log(`${basesURL}/${functionName}`)
 export const getLocationFromNetlify = async function (): Promise<Location> {
   console.log('getLocationFromNetlify')
-  const response = await fetch(`${basesURL}/${functionName}`)
+  const response = await fetch(`${locationFunctionName}`)
   const data: NetlifyLocation = await response.json()
   console.log(data)
   return { latitude: data.latitude, longitude: data.longitude }
@@ -39,13 +31,8 @@ const getCoordinates = async function (): Promise<Location> {
   })
 }
 
-const isBrowsserGeoLocationGranted = async function (): Promise<boolean> {
-  const granted = await navigator.permissions.query({ name: 'geolocation' })
-  return granted.state === 'granted'
-}
-
 export const getLocation = async function (): Promise<Location> {
-  if (navigator.geolocation && (await isBrowsserGeoLocationGranted())) {
+  if (navigator.geolocation) {
     // navigator.geolocation.getCurrentPosition(success, error, options)
     console.log('Geolocation is supported')
     return await getCoordinates()
