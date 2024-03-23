@@ -12,6 +12,7 @@ export const WeatherBox = ({ weather }: WeatherBoxProps) => {
   const temperatureFRound = Math.round(temperatureF * 100) / 100
   const description =
     weather?.weather[0].description ?? 'Please Grant location access'
+  const fromBrowser = weather?.fromBrowser ?? false
 
   return (
     <>
@@ -20,6 +21,7 @@ export const WeatherBox = ({ weather }: WeatherBoxProps) => {
         {temperatureCRound}°C / {temperatureFRound}°F
       </h1>
       <h2>{description}</h2>
+      <h6>Location Source: {fromBrowser ? 'Your Browsser' : 'Your IP'}</h6>
     </>
   )
 }

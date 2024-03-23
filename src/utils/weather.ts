@@ -3,12 +3,11 @@ import { Location, Weather, weatherFunctionName } from './common'
 export const getWeatherByLocation = async function (
   location: Location
 ): Promise<Weather> {
-  const { latitude, longitude } = location
+  const { latitude, longitude, fromBrowser } = location
 
   const response = await fetch(
     `${weatherFunctionName}?lat=${latitude}&lon=${longitude}`
   )
-  const data: Weather = await response.json()
-  console.log(data)
+  const data: Weather = { ...(await response.json()), fromBrowser }
   return data
 }

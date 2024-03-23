@@ -4,14 +4,17 @@ export const getLocationFromNetlify = async function (): Promise<Location> {
   console.log('getLocationFromNetlify')
   const response = await fetch(`${locationFunctionName}`)
   const data: NetlifyLocation = await response.json()
-  console.log(data)
-  return { latitude: data.latitude, longitude: data.longitude }
+  return {
+    latitude: data.latitude,
+    longitude: data.longitude,
+    fromBrowser: false,
+  }
 }
 
 const positionSuccess = function (position: GeolocationPosition): Location {
   const latitude = position.coords.latitude
   const longitude = position.coords.longitude
-  return { latitude, longitude }
+  return { latitude, longitude, fromBrowser: true }
 }
 
 const positionFailed = async function (): Promise<Location> {

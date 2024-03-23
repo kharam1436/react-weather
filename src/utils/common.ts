@@ -7,7 +7,11 @@ export const locationFunctionName = `${basesURL}/location`
 export const weatherFunctionName = `${basesURL}/weather`
 
 // location type
-export type Location = { latitude: number; longitude: number }
+export type Location = {
+  latitude: number
+  longitude: number
+  fromBrowser: boolean
+}
 
 // weather type
 export type Weather = {
@@ -37,6 +41,7 @@ export type Weather = {
   id: number
   name: string
   cod: number
+  fromBrowser: boolean
 }
 
 // Netlify Location info
