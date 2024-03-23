@@ -30,3 +30,18 @@ export type Weather = {
   name: string
   cod: number
 }
+
+// Netlify Location info
+type Country = {
+  code: string
+  name: string
+}
+
+export type NetlifyLocation = {
+  city: string
+  country: Country
+  subdivision: Country
+  timezone: string
+  latitude: number
+  longitude: number
+}
