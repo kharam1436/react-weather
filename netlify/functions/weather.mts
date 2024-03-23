@@ -8,12 +8,10 @@ export default async (req: Request, context: Context) => {
   const longitude: string | null = new URL(req.url).searchParams.get('lon')
   const apiKey = Netlify.env.get('REACT_APP_OPENWEATHERMAP_API_KEY')
 
-
   const response = await fetch(
-    `${BASE_URL}?lat=${latitude}&lon=${longitude}&appid=${apiKey}`,
+    `${BASE_URL}?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
   )
   const data: Weather = await response.json()
-
 
   return new Response(JSON.stringify(data))
 }
