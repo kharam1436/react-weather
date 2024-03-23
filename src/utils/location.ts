@@ -11,6 +11,11 @@ export const getLocationFromNetlify = async function (): Promise<Location> {
   }
 }
 
+/**
+ * Get the coordinates of the user
+ * @param position position success, contains the coordinates
+ * @returns Location
+ */
 const positionSuccess = function (position: GeolocationPosition): Location {
   const latitude = position.coords.latitude
   const longitude = position.coords.longitude
@@ -21,6 +26,11 @@ const positionFailed = async function (): Promise<Location> {
   console.log('User not granted the permission for Geolocation')
   return await getLocationFromNetlify()
 }
+
+/**
+ * Get the coordinates of the user
+ * @returns Location
+ */
 const getCoordinates = async function (): Promise<Location> {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(
@@ -34,6 +44,10 @@ const getCoordinates = async function (): Promise<Location> {
   })
 }
 
+/**
+ * Get the location of the user
+ * @returns Location
+ */
 export const getLocation = async function (): Promise<Location> {
   if (navigator.geolocation) {
     // navigator.geolocation.getCurrentPosition(success, error, options)

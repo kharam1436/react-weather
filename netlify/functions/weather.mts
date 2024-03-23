@@ -13,5 +13,7 @@ export default async (req: Request, context: Context) => {
   )
   const data: Weather = await response.json()
 
+  console.log(data)
+
   return new Response(JSON.stringify(data))
 }
