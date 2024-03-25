@@ -11,3 +11,11 @@ export const getWeatherByLocation = async function (
   const data: Weather = { ...(await response.json()), fromBrowser }
   return data
 }
+
+export const getWeatherByCity = async function (
+  city: string
+): Promise<Weather> {
+  const response = await fetch(`${weatherFunctionName}?city=${city}`)
+  const data: Weather = { ...(await response.json()), fromBrowser: false }
+  return data
+}

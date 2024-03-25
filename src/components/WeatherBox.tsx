@@ -2,9 +2,10 @@ import { Weather } from '../utils/common'
 
 type WeatherBoxProps = {
   weather: Weather | null
+  city: string
 }
-export const WeatherBox = ({ weather }: WeatherBoxProps) => {
-  const city = weather?.name ?? 'No city found'
+export const WeatherBox = ({ weather, city }: WeatherBoxProps) => {
+  const selectedCity = weather?.name ?? 'No city found'
   const temperatureK = weather?.main.temp
   const temperatureC = temperatureK ? temperatureK - 273.15 : 0
   const temperatureF = temperatureK ? ((temperatureK - 273.15) * 9) / 5 + 32 : 0
@@ -16,7 +17,7 @@ export const WeatherBox = ({ weather }: WeatherBoxProps) => {
 
   return (
     <>
-      <p>{city}</p>
+      <p>{selectedCity}</p>
       <h1>
         {temperatureCRound}°C / {temperatureFRound}°F
       </h1>
