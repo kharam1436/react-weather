@@ -26,7 +26,7 @@ function App() {
   }
 
   useEffect(() => {
-    changeWeather()
+    changeWeather().then()
   }, [currectCity])
   return (
     <div className="App">
