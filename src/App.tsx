@@ -13,20 +13,18 @@ function App() {
   const [weather, setWeather] = useState<Weather | null>(null)
   const [loading, setLoading] = useState(true)
 
-  const changeWeather = async function () {
+  useEffect(() => {
     setLoading(true)
     if (currectCity === 'current city') {
-      const w = await getLocation().then(getWeatherByLocation)
-      setWeather(w)
+      getLocation()
+        .then(getWeatherByLocation)
+        .then(setWeather)
+        .then(() => setLoading(false))
     } else {
-      const w = await getWeatherByCity(currectCity)
-      setWeather(w)
+      getWeatherByCity(currectCity)
+        .then(setWeather)
+        .then(() => setLoading(false))
     }
-    setLoading(false)
-  }
-
-  useEffect(() => {
-    changeWeather().then()
   }, [currectCity])
   return (
     <div className="App">
