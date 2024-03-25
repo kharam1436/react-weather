@@ -11,8 +11,10 @@ export const WeatherBoxList = ({
 }: WeatherBoxListProps) => {
   return (
     <div className="ciyt-list-buttons">
-      {cityList.map((city) => (
-        <button onClick={() => setCurrentCity(city)}>{city}</button>
+      {cityList.map((city, idx) => (
+        <button key={idx} onClick={() => setCurrentCity(city)}>
+          {city}
+        </button>
       ))}
     </div>
   )

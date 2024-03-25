@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { ClipLoader } from 'react-spinners'
 import './App.css'
 import { WeatherBox } from './components/WeatherBox'
 import { WeatherBoxList } from './components/WeatherBoxList'
@@ -13,21 +14,44 @@ function App() {
   const [loading, setLoading] = useState(true)
   let [color, setColor] = useState('#ffffff')
 
-  useEffect(() => {
+  const changeWeather = async function () {
+    setLoading(true)
     if (currectCity === 'current city') {
-      getLocation().then(getWeatherByLocation).then(setWeather)
+      const w = await getLocation().then(getWeatherByLocation)
+      setWeather(w)
     } else {
-      getWeatherByCity(currectCity).then(setWeather)
+      const w = await getWeatherByCity(currectCity)
+      setWeather(w)
     }
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    changeWeather()
   }, [currectCity])
   return (
     <div className="App">
       <div className="weather-box">
-        <WeatherBox city={currectCity} weather={weather} />
-        <WeatherBoxList
-          cityList={locationList}
-          setCurrentCity={setCurrentCity}
-        ></WeatherBoxList>
+        {loading ? (
+          <>
+            <ClipLoader
+              color={color}
+              loading={loading}
+              // cssOverride={override}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </>
+        ) : (
+          <>
+            <WeatherBox city={currectCity} weather={weather} />
+            <WeatherBoxList
+              cityList={locationList}
+              setCurrentCity={setCurrentCity}
+            ></WeatherBoxList>
+          </>
+        )}
       </div>
     </div>
   )
