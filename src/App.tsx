@@ -12,7 +12,6 @@ function App() {
   const [currectCity, setCurrentCity] = useState<string>('current city')
   const [weather, setWeather] = useState<Weather | null>(null)
   const [loading, setLoading] = useState(true)
-  let [color, setColor] = useState('#ffffff')
 
   const changeWeather = async function () {
     setLoading(true)
@@ -35,7 +34,7 @@ function App() {
         {loading ? (
           <>
             <ClipLoader
-              color={color}
+              color="#ffffff"
               loading={loading}
               // cssOverride={override}
               size={150}
